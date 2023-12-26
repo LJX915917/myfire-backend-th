@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  error:
+    path: /error
+spring:
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  application:
+    name: myfire-backend
+  profiles:
+    active: "@spring.active@"
+  devtools:
+    restart:
+      exclude: application*.yml
+      enabled: true
+  swagger:
+    enable: true
+    groupName: "myfire-frontend"
+    basePackage: "com.lusifer.myfire"
+    version: "1.0.0"
+    title: "智联消防平台"
+    description: "开发文档"
+    contactName: "Lusifer"
+    contactEmail: "lee.lusifer@gmail.com"
+    contactUrl: "www.lusifer.com"
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: del_flag # 全局逻辑删除的实体字段名(通过配置文件配置可以不使用@TableLogic)
+      logic-delete-value: Y # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: N # 逻辑未删除值(默认为 0)
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml,classpath*:com/lusifer/**/mapping/*.xml
+logging:
+  level:
+    mybatis: INFO
